@@ -1,6 +1,6 @@
 import type { Plugin } from "esbuild";
 
-export default (options: Partial<Options> = {}): Plugin => {
+export default async (options: Partial<Options> = {}): Plugin => {
 	const {
 		assets = [],
 		copyOnStart = false,
@@ -9,14 +9,11 @@ export default (options: Partial<Options> = {}): Plugin => {
 		once = false,
 		resolveFrom = "out",
 		dryRun = false,
-		watch: _globalWatchControl = false,
 	} = options;
-
-	let globalWatchControl = _globalWatchControl;
 
 	const verbose = dryRun === true || _verbose;
 
-	const formattedAssets = formatAssets(assets);
+	const formattedAssets = (await import("@Function/Format")).default(assets);
 
 	const applyHook = copyOnStart ? "onStart" : "onEnd";
 
@@ -77,9 +74,9 @@ export default (options: Partial<Options> = {}): Plugin => {
 				// the final value of outDirResolveFrom will be used by all asset pairs
 				// both relative and absolute path are okay
 				Log(
-					`Resolve assert pair to path from: ${path.resolve(
-						outDirResolveFrom
-					)}`,
+					`Resolve assert pair to path from: ${(
+						await import("path")
+					).resolve(outDirResolveFrom)}`,
 					verbose
 				);
 

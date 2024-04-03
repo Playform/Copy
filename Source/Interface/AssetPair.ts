@@ -2,7 +2,7 @@
  * @module AssetPair
  *
  */
-export interface AssetPair {
+export default interface Interface {
 	/**
 	 * from path is resolved based on `cwd`
 	 */

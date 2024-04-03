@@ -2,7 +2,7 @@
  * @module Options
  *
  */
-export interface Options {
+export default interface {
 	/**
 	 * assets pair to copy
 	 *
@@ -72,6 +72,7 @@ export interface Options {
 }
 
 import type MaybeArray from "@Type/MaybeArray.js";
+import type AssetPair from "@Interface/AssetPair.js";
 
 import type { WatchOptions } from "chokidar";
 import type { Options } from "fast-glob";
