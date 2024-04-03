@@ -6,20 +6,20 @@ ESBuild plugin for assets copy.
 -   [GitHub Repo](https://github.com/LinbuduLab/esbuild-plugins/tree/master/packages/@playform/copy#readme)
 -   [Changelog](https://github.com/LinbuduLab/esbuild-plugins/blob/main/packages/@playform/copy/CHANGELOG.md)
 
-## Features
+## Feature
 
 -   Keep copied assets file structure
 -   Control assets destination path freely
 -   Support verbose output log
 -   Run only once or only when assets changed
 
-## Usage
+## Installation
 
-```bash
-npm install @playform/copy --save-dev
-pnpm install @playform/copy --save-dev
-yarn add @playform/copy --save-dev
+```sh
+npm install -D -E @playform/copy
 ```
+
+## Usage
 
 ```ts
 import { build } from "esbuild";
@@ -110,7 +110,7 @@ like `dir/index.md`. If you want to match the nested files like
 If you're using `dir/*` and there are no files under this directory, you will
 got an warning:
 
-```bash
+```sh
 i No files matched using current glob pattern: ./node_modules/tinymce/skins/*, maybe you need to configure globby by options.globbyOptions?
 ```
 
