@@ -21,7 +21,7 @@ pnpm install @playform/copy --save-dev
 yarn add @playform/copy --save-dev
 ```
 
-```typescript
+```ts
 import { build } from "esbuild";
 import { copy } from "@playform/copy";
 
@@ -32,7 +32,7 @@ import { copy } from "@playform/copy";
 		watch: true,
 		outfile: "./dist/main.js",
 		plugins: [
-			copy({
+			Copy({
 				// this is equal to process.cwd(), which means we use cwd path as base path to resolve `to` path
 				// if not specified, this plugin uses ESBuild.build outdir/outfile options as base path.
 				resolveFrom: "cwd",
@@ -47,10 +47,10 @@ import { copy } from "@playform/copy";
 })();
 ```
 
-### Keep file structure
+### Keep
 
-```typescript
-import { copy } from "@playform/copy";
+```ts
+import Copy from "@playform/copy";
 import { build } from "esbuild";
 
 (async () => {
@@ -61,7 +61,7 @@ import { build } from "esbuild";
 		outfile: "./dist/main.js",
 		watch: true,
 		plugins: [
-			copy({
+			Copy({
 				assets: [
 					{
 						from: ["./node_modules/tinymce/skins/**/*"],
@@ -76,7 +76,7 @@ import { build } from "esbuild";
 
 File structure will be kept:
 
-```text
+```sh
 |-node_modules/tinymce/skins
 |--- content
 |----- dark
@@ -87,7 +87,7 @@ File structure will be kept:
 |----- oxide-dark
 ```
 
-```text
+```sh
 |- dist/dest/skins
 |--- content
 |----- dark
@@ -100,7 +100,7 @@ File structure will be kept:
 
 You can also use patterns with extension names like `./path/**/*.js`.
 
-## File Glob
+### Glob
 
 Note: This plugin doesnot expand directories by default, which means when you're
 using pattern `dir/*` or `dir/*.*` , you will only get the file inside `dir/`
@@ -114,7 +114,7 @@ got an warning:
 i No files matched using current glob pattern: ./node_modules/tinymce/skins/*, maybe you need to configure globby by options.globbyOptions?
 ```
 
-## Watching Mode
+## Watch
 
 You can use `watch` option to enable `watching mode`, which means this plugin
 will only copy files when assets changed. Also, you can control using
@@ -132,13 +132,13 @@ option.**
 `ESBuild.build.absWorkingDir`, as if the files inside `absWorkingDir` changed,
 ESBuild will re-execute plugin completely so we cannot choose file to copy.**
 
-```typescript
+```ts
 (async () => {
 	const res = await build({
 		// enable watching mode for all assets pair
 		watch: true,
 		plugins: [
-			copy({
+			Copy({
 				assets: [
 					{
 						from: [],
@@ -153,13 +153,13 @@ ESBuild will re-execute plugin completely so we cannot choose file to copy.**
 })();
 ```
 
-```typescript
+```ts
 (async () => {
 	const res = await build({
 		// disable watching mode for all assets pair
 		watch: false,
 		plugins: [
-			copy({
+			Copy({
 				assets: [
 					{
 						from: [],
@@ -178,7 +178,7 @@ ESBuild will re-execute plugin completely so we cannot choose file to copy.**
 
 ## Configurations
 
-```typescript
+```ts
 import type { GlobbyOptions } from "globby";
 import type { WatchOptions } from "chokidar";
 
