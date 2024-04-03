@@ -1,2 +1,2 @@
-var n=(e,l,o=!1)=>{l&&console.log(chalk.blue(o?`
-i`:"i"),e)};export{n as default};
+var o=async(e,a,l=!1)=>{a&&console.log((await import("chalk")).default.blue(l?`
+i`:"i"),e)};export{o as default};

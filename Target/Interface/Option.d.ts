@@ -40,12 +40,12 @@ export default interface Interface {
     /**
      * Resolve base path relative `assets.to` path
      * by default this plugin use `outdir` or `outfile` in your ESBuild options
-     * you can specify "cwd" or process.cwd() to resolve from current working directory,
+     * you can specify "Current" or process.cwd() to resolve from current working directory,
      * also, you can specify somewhere else to resolve from.
      *
-     * @default "out"
+     * @default "Out"
      */
-    Resolve: "cwd" | "out" | (string & {});
+    Resolve: "Current" | "Out" | (string & {});
     /**
      * use dry run mode to see what's happening.
      *
