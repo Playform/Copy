@@ -29,7 +29,6 @@ import { copy } from "@playform/copy";
 	const res = await build({
 		entryPoints: ["./src/main.ts"],
 		bundle: true,
-		watch: true,
 		outfile: "./dist/main.js",
 		plugins: [
 			Copy({
@@ -40,7 +39,6 @@ import { copy } from "@playform/copy";
 					from: ["./assets/*"],
 					to: ["./assets", "./tmp-assets"],
 				},
-				watch: true,
 			}),
 		],
 	});
@@ -59,7 +57,6 @@ import { build } from "esbuild";
 		bundle: true,
 		// as resolveFrom not set, we use dist as output base dir
 		outfile: "./dist/main.js",
-		watch: true,
 		plugins: [
 			Copy({
 				assets: [
@@ -114,69 +111,7 @@ got an warning:
 i No files matched using current glob pattern: ./node_modules/tinymce/skins/*, maybe you need to configure globby by options.globbyOptions?
 ```
 
-## Watch
-
-You can use `watch` option to enable `watching mode`, which means this plugin
-will only copy files when assets changed. Also, you can control using
-`watch mode` for all assets pair or only for some of them.
-
-Watching Mode of this plugin is implemented using polling for being consistent
-with ESBuild [Watch Mode](https://esbuild.github.io/api/#watch), you could
-change the behavior by setting `watch` option which will be passed to `chokidar`
-under the hood.
-
-**Note: To use `watching mode`, you must also enable `ESBuild.build.watch`
-option.**
-
-**Note: `Watching Mode` only works for files outside
-`ESBuild.build.absWorkingDir`, as if the files inside `absWorkingDir` changed,
-ESBuild will re-execute plugin completely so we cannot choose file to copy.**
-
-```ts
-(async () => {
-	const res = await build({
-		// enable watching mode for all assets pair
-		watch: true,
-		plugins: [
-			Copy({
-				assets: [
-					{
-						from: [],
-						to: [],
-						// disable watching mode for this assets pair only
-						watch: false,
-					},
-				],
-			}),
-		],
-	});
-})();
-```
-
-```ts
-(async () => {
-	const res = await build({
-		// disable watching mode for all assets pair
-		watch: false,
-		plugins: [
-			Copy({
-				assets: [
-					{
-						from: [],
-						to: [],
-						// enable watching mode for this assets pair only
-						watch: {
-							/** chokidar options */
-						},
-					},
-				],
-			}),
-		],
-	});
-})();
-```
-
-## Configurations
+## Configuration
 
 ```ts
 import type { GlobbyOptions } from "globby";
@@ -196,13 +131,6 @@ export interface AssetPair {
 	 * you can also set `resolveFrom` to change the base dir
 	 */
 	to: MaybeArray<string>;
-
-	/**
-	 * control watch mode for current assets
-	 *
-	 * @default false
-	 */
-	watch?: boolean | WatchOptions;
 }
 
 export interface Options {
@@ -265,13 +193,6 @@ export interface Options {
 	 * @default false
 	 */
 	dryRun?: boolean;
-
-	/**
-	 * control watch mode for all assets pair
-	 *
-	 * @default false
-	 */
-	watch?: boolean | WatchOptions;
 }
 ```
 

@@ -1,23 +1,23 @@
 /**
- * @module Options
+ * @module Option
  *
  */
-export default interface {
+export default interface Interface {
 	/**
-	 * assets pair to copy
+	 * Asset pair to copy
 	 *
 	 * @default []
 	 */
-	assets: MaybeArray<AssetPair>;
+	Asset: MaybeArray<AssetPair>;
 
 	/**
-	 * execute copy in `ESBuild.onEnd` hook(recommended)
+	 * Copy in `ESBuild.onEnd` hook(recommended)
 	 *
 	 * set to true if you want to execute in onStart hook
 	 *
 	 * @default false
 	 */
-	copyOnStart: boolean;
+	Copy: boolean;
 
 	/**
 	 * enable verbose logging
@@ -26,33 +26,31 @@ export default interface {
 	 *
 	 * @default false
 	 */
-	verbose: boolean;
+	Verbose: boolean;
 
 	/**
 	 * options passed to `fast-glob` when we 're globbing for files to copy
 	 *
 	 * @default {}
 	 */
-	Glob: GlobbyOptions;
+	Glob: Options;
 
 	/**
-	 * only execute copy operation once
-	 *
-	 * useful when you're using ESBuild.build watching mode
+	 * Execute copy operation only once
 	 *
 	 * @default false
 	 */
-	once: boolean;
+	Once: boolean;
 
 	/**
-	 * base path used to resolve relative `assets.to` path
+	 * Resolve base path relative `assets.to` path
 	 * by default this plugin use `outdir` or `outfile` in your ESBuild options
 	 * you can specify "cwd" or process.cwd() to resolve from current working directory,
 	 * also, you can specify somewhere else to resolve from.
 	 *
 	 * @default "out"
 	 */
-	resolveFrom: "cwd" | "out" | (string & {});
+	Resolve: "cwd" | "out" | (string & {});
 
 	/**
 	 * use dry run mode to see what's happening.
@@ -61,18 +59,11 @@ export default interface {
 	 *
 	 * @default false
 	 */
-	dryRun?: boolean;
-
-	/**
-	 * control watch mode for all assets pair
-	 *
-	 * @default false
-	 */
-	watch?: boolean | WatchOptions;
+	Dry?: boolean;
 }
 
 import type MaybeArray from "@Type/MaybeArray.js";
+
 import type AssetPair from "@Interface/AssetPair.js";
 
-import type { WatchOptions } from "chokidar";
 import type { Options } from "fast-glob";

@@ -13,15 +13,6 @@ export default interface Interface {
 	 * you can also set `resolveFrom` to change the base dir
 	 */
 	to: MaybeArray<string>;
-
-	/**
-	 * control watch mode for current assets
-	 *
-	 * @default false
-	 */
-	watch?: boolean | WatchOptions;
 }
 
 import type MaybeArray from "@Type/MaybeArray.js";
-
-import type { WatchOptions } from "chokidar";
