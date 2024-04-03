@@ -115,7 +115,6 @@ i No files matched using current glob pattern: ./node_modules/tinymce/skins/*, m
 
 ```ts
 import type { GlobbyOptions } from "globby";
-import type { WatchOptions } from "chokidar";
 
 export type MaybeArray<T> = T | T[];
 
@@ -168,8 +167,6 @@ export interface Options {
 
 	/**
 	 * only execute copy operation once
-	 *
-	 * useful when you're using ESBuild.build watching mode
 	 *
 	 * @default false
 	 */

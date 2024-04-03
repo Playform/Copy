@@ -13,12 +13,12 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 
 	const Verbose = Dry === true || _Verbose;
 
-	const Format = (await import("@Function/Format")).default(Asset);
+	const Format = (await import("@Function/Format.js")).default(Asset);
 
 	const Apply = Copy ? "onStart" : "onEnd";
 
 	return {
-		name: "plugin:copy",
+		name: "@playform/copy",
 		setup(build) {
 			build[Apply](async () => {
 				if (Once && process.env[PLUGIN_EXECUTED_FLAG] === "true") {
@@ -99,29 +99,27 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 						Log(
 							`No files matched using current glob pattern: ${Chalk.white(
 								from
-							)}, maybe you need to configure globby by ${Chalk.white(
+							)}, maybe you need to configure fast-glob by ${Chalk.white(
 								"options.Glob"
 							)}?`,
 							Verbose
 						);
 					}
 
-					const executor = () => {
-						for (const fromPath of deduplicatedPaths) {
-							to.forEach((toPath) => {
-								Handle(
-									outDirResolveFrom,
-									from,
-									fromPath,
-									toPath,
-									Verbose,
-									Dry
-								);
-							});
-						}
+					for (const fromPath of deduplicatedPaths) {
+						to.forEach((toPath) => {
+							Handle(
+								outDirResolveFrom,
+								from,
+								fromPath,
+								toPath,
+								Verbose,
+								Dry
+							);
+						});
+					}
 
-						process.env[PLUGIN_EXECUTED_FLAG] = "true";
-					};
+					process.env[PLUGIN_EXECUTED_FLAG] = "true";
 				}
 			});
 		},

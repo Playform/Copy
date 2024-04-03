@@ -35,10 +35,8 @@
 		"fast-glob": "3.3.2",
 		"fs-extra": "11.2.0"
 	},
-	"devDependencies": {
-		"@playform/build": "0.0.2"
-	},
 	"optionalDependencies": {
+		"@playform/build": "0.0.2",
 		"@playform/document": "0.0.2"
 	}
 }

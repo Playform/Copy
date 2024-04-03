@@ -10,7 +10,7 @@ export default interface Interface {
 
 	/**
 	 * to path is resolved based on `outdir` or `outfile` in your ESBuild options by default
-	 * you can also set `resolveFrom` to change the base dir
+	 * you can also set `Resolve` to change the base dir
 	 */
 	to: MaybeArray<string>;
 }
