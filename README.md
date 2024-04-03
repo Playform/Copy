@@ -34,8 +34,8 @@ import { copy } from "@playform/copy";
 			Copy({
 				// this is equal to process.cwd(), which means we use cwd path as base path to resolve `to` path
 				// if not specified, this plugin uses ESBuild.build outdir/outfile options as base path.
-				resolveFrom: "cwd",
-				assets: {
+				Resolve: "Current",
+				Asset: {
 					from: ["./assets/*"],
 					to: ["./assets", "./tmp-assets"],
 				},
@@ -55,7 +55,7 @@ import { build } from "esbuild";
 	const res = await build({
 		entryPoints: ["./src/index.ts"],
 		bundle: true,
-		// as resolveFrom not set, we use dist as output base dir
+		// as Resolve not set, we use dist as output base dir
 		outfile: "./dist/main.js",
 		plugins: [
 			Copy({
@@ -127,7 +127,7 @@ export interface AssetPair {
 
 	/**
 	 * to path is resolved based on `outdir` or `outfile` in your ESBuild options by default
-	 * you can also set `resolveFrom` to change the base dir
+	 * you can also set `Resolve` to change the base dir
 	 */
 	to: MaybeArray<string>;
 }
@@ -170,17 +170,17 @@ export interface Options {
 	 *
 	 * @default false
 	 */
-	once: boolean;
+	Once: boolean;
 
 	/**
 	 * base path used to resolve relative `assets.to` path
 	 * by default this plugin use `outdir` or `outfile` in your ESBuild options
-	 * you can specify "cwd" or process.cwd() to resolve from current working directory,
+	 * you can specify "Current" or process.cwd() to resolve from current working directory,
 	 * also, you can specify somewhere else to resolve from.
 	 *
-	 * @default "out"
+	 * @default "Out"
 	 */
-	resolveFrom: "cwd" | "out" | (string & {});
+	Resolve: "Current" | "Out" | (string & {});
 
 	/**
 	 * use dry run mode to see what's happening.
@@ -189,7 +189,7 @@ export interface Options {
 	 *
 	 * @default false
 	 */
-	dryRun?: boolean;
+	Dry?: boolean;
 }
 ```
 

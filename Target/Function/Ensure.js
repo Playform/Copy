@@ -1,5 +1,1 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (function (item) {
-    return Array.isArray(item) ? item : [item];
-});
+var a=r=>Array.isArray(r)?r:[r];export{a as default};

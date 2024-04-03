@@ -1,43 +1,38 @@
-import path from "path";
-import fs from "fs-extra";
-import chalk from "chalk";
-
-import { verboseLog } from "./utils";
-
 /**
+ * @module Handle
  *
  * @param outDirResolveFrom the base destination dir that will resolve with asset.to value
  * @param rawFromPath the original asset.from value from user config
  * @param globbedFromPath the globbed file from path, which are globbed from rawFromPath
  * @param baseToPath the original asset.to value from user config, which will be resolved with outDirResolveFrom option
- * @param verbose verbose logging
- * @param dryRun dry run mode
+ * @param Verbose Verbose logging
+ * @param Dry Dry run mode
  * @returns
  */
 export default async (
-	outDirResolveFrom: string,
-	rawFromPath: string[],
-	globbedFromPath: string,
-	baseToPath: string,
-	verbose = false,
-	dryRun = false
+	Out: string,
+	Raw: string[],
+	Glob: string,
+	Base: string,
+	Verbose = false,
+	Dry = false
 ) => {
-	for (const rawFrom of rawFromPath) {
+	for (const rawFrom of Raw) {
 		// only support from dir like: /**/*(.ext)
-		const { dir } = path.parse(rawFrom);
+		const { dir } = (await import("path")).parse(rawFrom);
 
 		// be default, when ends with /*, glob doesnot expand directories
 		// avoid use override option `expandDirectories` and use `/*`
 
 		// if from path ends with /* like assets/* or assets/*.ext, we give a warning?
 		if (!dir.endsWith("/**")) {
-			verboseLog(
+			Log(
 				`The from path ${chalk.white(
-					rawFromPath
+					Raw
 				)} of current asset pair doesnot ends with ${chalk.white(
 					"/**/*(.ext)"
 				)}, `,
-				verbose
+				Verbose
 			);
 		}
 
@@ -47,40 +42,62 @@ export default async (
 
 		// globbedFromPath: /PATH/TO/assets/foo.js → /foo.js
 		// globbedFromPath: /PATH/TO/assets/nest/foo.js → /nest/foo.js
-		const [, preservedDirStructure] = globbedFromPath.split(startFragment);
+		const [, preservedDirStructure] = Glob.split(startFragment);
 
 		// /PATH/TO/assets/foo.js
-		// path.resolve seems to be unnecessary as globbed path is already absolute path
-		const sourcePath = path.resolve(globbedFromPath);
+		// resolve seems to be unnecessary as globbed path is already absolute path
+		const Source = resolve(Glob);
 
-		const isToPathDir = path.extname(baseToPath) === "";
+		const isToPathDir = (await import("path")).extname(Base) === "";
 
 		const composedDistDirPath = isToPathDir
 			? // /RESOLVE_FROM_DIR/SPECIFIED_TO_DIR/LEFT_FILE_STRUCTURE
-				path.resolve(
+				resolve(
 					// base resolve destination dir
-					outDirResolveFrom,
+					Out,
 					// configures destination dir
-					baseToPath,
+					Base,
 					// internal dir structure, remove the first slash
-					preservedDirStructure.slice(1)
+					preservedDirStructure ? preservedDirStructure.slice(1) : ""
 				)
-			: path.resolve(
+			: resolve(
 					// base resolve destination dir
-					outDirResolveFrom,
+					Out,
 					// configures destination dir
-					baseToPath
+					Base
 				);
 
-		dryRun ? void 0 : fs.ensureDirSync(path.dirname(composedDistDirPath));
+		if (!Dry) {
+			try {
+				await (
+					await import("fs/promises")
+				).access(
+					(await import("path")).dirname(composedDistDirPath),
+					(await import("fs/promises")).constants.R_OK
+				);
 
-		dryRun ? void 0 : fs.copyFileSync(sourcePath, composedDistDirPath);
+				(await import("fs/promises")).copyFile(
+					Source,
+					composedDistDirPath
+				);
+			} catch (_Error) {
+				Log(new String(_Error).toString(), Verbose);
+			}
+		}
 
-		(await import("@Function/Log.js")).default(
-			`${dryRun ? chalk.white("[DryRun] ") : ""}File copied: ${chalk.white(
-				sourcePath
+		Log(
+			`${Dry ? chalk.white("[DryRun] ") : ""}File copied: ${chalk.white(
+				Source
 			)} -> ${chalk.white(composedDistDirPath)}`,
-			verbose
+			Verbose
 		);
 	}
 };
+
+import chalk from "chalk";
+
+export const {
+	default: { resolve },
+} = await import("path");
+
+export const { default: Log } = await import("@Function/Log.js");

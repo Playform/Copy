@@ -1,6 +1,14 @@
-export default (msg: string, verbose: boolean, lineBefore = false) => {
-	if (!verbose) {
+/**
+ * @module Log
+ *
+ */
+export default async (Message: string, Verbose: boolean, Before = false) => {
+	if (!Verbose) {
 		return;
 	}
-	console.log(chalk.blue(lineBefore ? "\ni" : "i"), msg);
+
+	console.log(
+		(await import("chalk")).default.blue(Before ? "\ni" : "i"),
+		Message
+	);
 };

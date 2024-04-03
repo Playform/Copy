@@ -1,5 +1,3 @@
-import type { Plugin } from "esbuild";
-
 export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 	const {
 		Asset = [],
@@ -7,7 +5,7 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 		Glob = {},
 		Verbose: _Verbose = false,
 		Once = false,
-		Resolve = "out",
+		Resolve = "Out",
 		Dry = false,
 	} = Option;
 
@@ -22,10 +20,11 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 		setup(build) {
 			build[Apply](async () => {
 				if (Once && process.env[PLUGIN_EXECUTED_FLAG] === "true") {
-					Log(
+					await Log(
 						`Copy plugin skipped as option ${Chalk.white("Once")} set to true`,
 						Verbose
 					);
+
 					return;
 				}
 
@@ -33,25 +32,25 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 					return;
 				}
 
-				// the base destination dir that will resolve with asset.to value
+				// The base destination dir that will resolve with asset.to value
 				let outDirResolveFrom: string;
 
-				// resolve from cwd
-				if (Resolve === "cwd") {
+				// Resolve from cwd
+				if (Resolve === "Current") {
 					outDirResolveFrom = process.cwd();
-					// resolve from outdir or outfile
-				} else if (Resolve === "out") {
-					// outdir takes precedence over outfile because it should be used more widely
+					// Resolve from outdir or outfile
+				} else if (Resolve === "Out") {
+					// Outdir takes precedence over outfile because it should be used more widely
 					const outDir =
 						build.initialOptions.outdir ??
-						// for outfile, use the directory it located in
+						// For outfile, use the directory it located in
 						(await import("path")).dirname(
 							build.initialOptions.outfile!
 						);
 
 					// This log should not be displayed as ESBuild will ensure one of options provided
 					if (!outDir) {
-						Log(
+						await Log(
 							Chalk.red(
 								`You should provide valid ${Chalk.white(
 									"outdir"
@@ -69,13 +68,13 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 
 					outDirResolveFrom = outDir;
 				} else {
-					// use custom Resolve dir
+					// Use custom Resolve dir
 					outDirResolveFrom = Resolve;
 				}
 
-				// the final value of outDirResolveFrom will be used by all asset pairs
-				// both relative and absolute path are okay
-				Log(
+				// The final value of outDirResolveFrom will be used by all asset pairs
+				// Both relative and absolute path are okay
+				await Log(
 					`Resolve assert pair to path from: ${(
 						await import("path")
 					).resolve(outDirResolveFrom)}`,
@@ -88,7 +87,7 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 							await (
 								await import("fast-glob")
 							).default(from, {
-								// ensure outputs contains only file path
+								// Ensure outputs contains only file path
 								onlyFiles: true,
 								...Glob,
 							})
@@ -96,7 +95,7 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 					];
 
 					if (!deduplicatedPaths.length) {
-						Log(
+						await Log(
 							`No files matched using current glob pattern: ${Chalk.white(
 								from
 							)}, maybe you need to configure fast-glob by ${Chalk.white(
@@ -125,6 +124,8 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 		},
 	};
 };
+
+import type { Plugin } from "esbuild";
 
 import type Option from "@Interface/Option.js";
 
