@@ -3,7 +3,7 @@
 ESBuild plugin for assets copy.
 
 -   [Author](https://github.com/linbudu599)
--   [GitHub Repo](https://github.com/LinbuduLab/esbuild-plugins/tree/master/packages/@playform/copy#readme)
+-   [GitHub Repo](https://github.com/LinbuduLab/esbuild-plugins/tree/master/packages/@playform/copy#ReadMe)
 -   [Changelog](https://github.com/LinbuduLab/esbuild-plugins/blob/main/packages/@playform/copy/CHANGELOG.md)
 
 ## Feature
