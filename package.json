@@ -5,6 +5,7 @@
 	"description": "©️ Copy.",
 	"keywords": [
 		"esbuild",
+		"plugin",
 		"copy"
 	],
 	"homepage": "https://github.com/Playform/Copy#ReadMe",
