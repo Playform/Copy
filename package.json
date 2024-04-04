@@ -26,7 +26,6 @@
 	"main": "./Target/Function/Copy.js",
 	"types": "./Target/Function/Copy.d.ts",
 	"scripts": {
-		"Document": "Document 'Source/**/*.ts'",
 		"prepublishOnly": "Build 'Source/**/*.ts'"
 	},
 	"dependencies": {
@@ -34,9 +33,6 @@
 		"fast-glob": "3.3.2"
 	},
 	"devDependencies": {
-		"@playform/build": "0.0.2"
-	},
-	"peerDependencies": {
-		"@playform/document": "0.0.3"
+		"@playform/build": "0.0.4"
 	}
 }
