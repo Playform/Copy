@@ -33,6 +33,6 @@
 		"fast-glob": "3.3.2"
 	},
 	"devDependencies": {
-		"@playform/build": "0.0.4"
+		"@playform/build": "0.0.5"
 	}
 }
