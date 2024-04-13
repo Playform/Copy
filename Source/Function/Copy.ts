@@ -21,7 +21,9 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 			build[Apply](async () => {
 				if (Once && process.env[PLUGIN_EXECUTED_FLAG] === "true") {
 					await Log(
-						`Copy plugin skipped as option ${Chalk.white("Once")} set to true`,
+						`Copy plugin skipped as option ${Chalk.white(
+							"Once"
+						)} set to true`,
 						Verbose
 					);
 
@@ -58,7 +60,9 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 									"outfile"
 								)} for assets copy. received outdir:${
 									build.initialOptions.outdir
-								}, received outfile:${build.initialOptions.outfile}`
+								}, received outfile:${
+									build.initialOptions.outfile
+								}`
 							),
 							Verbose
 						);
