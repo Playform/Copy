@@ -2,7 +2,7 @@
 	"name": "@playform/copy",
 	"version": "0.0.1",
 	"private": false,
-	"description": "©️ Copy.",
+	"description": "©️ Copy —",
 	"keywords": [
 		"esbuild",
 		"plugin",
