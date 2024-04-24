@@ -9,19 +9,19 @@
 		"copy",
 		"playform"
 	],
-	"homepage": "HTTPS://GitHub.Com/Playform/Copy#readme",
+	"homepage": "HTTPS://GitHub.Com/PlayForm/Copy#readme",
 	"bugs": {
-		"url": "HTTPS://GitHub.Com/Playform/Copy/issues"
+		"url": "HTTPS://GitHub.Com/PlayForm/Copy/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+HTTPS://github.com/Playform/Copy.git"
+		"url": "git+HTTPS://github.com/PlayForm/Copy.git"
 	},
 	"license": "SEE LICENSE IN LICENSE",
 	"author": {
 		"name": "⛲ Source ⁄ 🚪 Open —",
-		"email": "Source/Open@Playform.Cloud",
-		"url": "HTTPS://Playform.Cloud"
+		"email": "Source/Open@PlayForm.Cloud",
+		"url": "HTTPS://PlayForm.Cloud"
 	},
 	"type": "module",
 	"main": "./Target/Function/Copy.js",
