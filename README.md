@@ -1,4 +1,4 @@
-# ©️ [Copy.]
+# ©️ [Copy —]
 
 ESBuild plugin for assets copy.
 
@@ -193,7 +193,7 @@ export interface Options {
 }
 ```
 
-[Copy.]: HTTPS://npmjs.org/@playform/copy
+[Copy —]: httpS://npmjs.org/@playform/copy
 
 ## Changelog
 
