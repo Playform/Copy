@@ -1,4 +1,4 @@
-# ©️ [Copy] —
+# ©️ — [Copy] —
 
 ESBuild plugin for assets copy.
 
