@@ -55,6 +55,6 @@ export default interface Interface {
      */
     Dry?: boolean;
 }
-import type MaybeArray from "@Type/MaybeArray.js";
-import type AssetPair from "@Interface/AssetPair.js";
+import type MaybeArray from "../Type/MaybeArray.js";
+import type AssetPair from "../Interface/AssetPair.js";
 import type { Options } from "fast-glob";

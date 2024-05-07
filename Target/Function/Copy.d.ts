@@ -1,7 +1,7 @@
 declare const _default: (Option?: Partial<Option>) => Promise<Plugin>;
 export default _default;
 import type { Plugin } from "esbuild";
-import type Option from "@Interface/Option.js";
+import type Option from "../Interface/Option.js";
 export declare const PLUGIN_EXECUTED_FLAG = "esbuild_copy_executed";
 export declare const Chalk: import("chalk").ChalkInstance;
 export declare const Log: (Message: string, Verbose: boolean, Before?: boolean) => Promise<void>;
