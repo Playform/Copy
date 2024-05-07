@@ -131,7 +131,7 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 
 import type { Plugin } from "esbuild";
 
-import type Option from "@Interface/Option.js";
+import type Option from "../Interface/Option.js";
 
 export const PLUGIN_EXECUTED_FLAG = "esbuild_copy_executed";
 

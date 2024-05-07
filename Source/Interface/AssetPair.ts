@@ -15,4 +15,4 @@ export default interface Interface {
 	to: MaybeArray<string>;
 }
 
-import type MaybeArray from "@Type/MaybeArray.js";
+import type MaybeArray from "../Type/MaybeArray.js";
