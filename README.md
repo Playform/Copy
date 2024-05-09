@@ -193,7 +193,7 @@ export interface Options {
 }
 ```
 
-[Copy]: HTTPS://npmjs.org/@playform/copy
+[Copy]: HTTPS://NPMJS.Org/@playform/copy
 
 ## Changelog
 
