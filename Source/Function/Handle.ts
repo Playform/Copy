@@ -15,7 +15,7 @@ export default async (
 	Glob: string,
 	Base: string,
 	Verbose = false,
-	Dry = false
+	Dry = false,
 ) => {
 	for (const rawFrom of Raw) {
 		// only support from dir like: /**/*(.ext)
@@ -28,11 +28,11 @@ export default async (
 		if (!dir.endsWith("/**")) {
 			Log(
 				`The from path ${chalk.white(
-					Raw
+					Raw,
 				)} of current asset pair doesnot ends with ${chalk.white(
-					"/**/*(.ext)"
+					"/**/*(.ext)",
 				)}, `,
-				Verbose
+				Verbose,
 			);
 		}
 
@@ -58,27 +58,25 @@ export default async (
 					// configures destination dir
 					Base,
 					// internal dir structure, remove the first slash
-					preservedDirStructure ? preservedDirStructure.slice(1) : ""
+					preservedDirStructure ? preservedDirStructure.slice(1) : "",
 				)
 			: resolve(
 					// base resolve destination dir
 					Out,
 					// configures destination dir
-					Base
+					Base,
 				);
 
 		if (!Dry) {
 			try {
-				await (
-					await import("fs/promises")
-				).access(
+				await (await import("fs/promises")).access(
 					(await import("path")).dirname(composedDistDirPath),
-					(await import("fs/promises")).constants.R_OK
+					(await import("fs/promises")).constants.R_OK,
 				);
 
 				(await import("fs/promises")).copyFile(
 					Source,
-					composedDistDirPath
+					composedDistDirPath,
 				);
 			} catch (_Error) {
 				Log(new String(_Error).toString(), Verbose);
@@ -87,9 +85,9 @@ export default async (
 
 		Log(
 			`${Dry ? chalk.white("[DryRun] ") : ""}File copied: ${chalk.white(
-				Source
+				Source,
 			)} -> ${chalk.white(composedDistDirPath)}`,
-			Verbose
+			Verbose,
 		);
 	}
 };

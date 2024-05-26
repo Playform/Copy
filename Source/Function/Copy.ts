@@ -22,9 +22,9 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 				if (Once && process.env[PLUGIN_EXECUTED_FLAG] === "true") {
 					await Log(
 						`Copy plugin skipped as option ${Chalk.white(
-							"Once"
+							"Once",
 						)} set to true`,
-						Verbose
+						Verbose,
 					);
 
 					return;
@@ -47,7 +47,7 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 						build.initialOptions.outdir ??
 						// For outfile, use the directory it located in
 						(await import("path")).dirname(
-							build.initialOptions.outfile!
+							build.initialOptions.outfile!,
 						);
 
 					// This log should not be displayed as ESBuild will ensure one of options provided
@@ -55,16 +55,16 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 						await Log(
 							Chalk.red(
 								`You should provide valid ${Chalk.white(
-									"outdir"
+									"outdir",
 								)} or ${Chalk.white(
-									"outfile"
+									"outfile",
 								)} for assets copy. received outdir:${
 									build.initialOptions.outdir
 								}, received outfile:${
 									build.initialOptions.outfile
-								}`
+								}`,
 							),
-							Verbose
+							Verbose,
 						);
 
 						return;
@@ -82,30 +82,28 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 					`Resolve assert pair to path from: ${(
 						await import("path")
 					).resolve(outDirResolveFrom)}`,
-					Verbose
+					Verbose,
 				);
 
 				for (const { from, to } of Format) {
 					const deduplicatedPaths = [
 						...new Set(
-							await (
-								await import("fast-glob")
-							).default(from, {
+							await (await import("fast-glob")).default(from, {
 								// Ensure outputs contains only file path
 								onlyFiles: true,
 								...Glob,
-							})
+							}),
 						),
 					];
 
 					if (!deduplicatedPaths.length) {
 						await Log(
 							`No files matched using current glob pattern: ${Chalk.white(
-								from
+								from,
 							)}, maybe you need to configure fast-glob by ${Chalk.white(
-								"options.Glob"
+								"options.Glob",
 							)}?`,
-							Verbose
+							Verbose,
 						);
 					}
 
@@ -117,7 +115,7 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 								fromPath,
 								toPath,
 								Verbose,
-								Dry
+								Dry,
 							);
 						});
 					}
