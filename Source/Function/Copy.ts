@@ -88,7 +88,9 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 				for (const { from, to } of Format) {
 					const deduplicatedPaths = [
 						...new Set(
-							await (await import("fast-glob")).default(from, {
+							await (
+								await import("fast-glob")
+							).default(from, {
 								// Ensure outputs contains only file path
 								onlyFiles: true,
 								...Glob,

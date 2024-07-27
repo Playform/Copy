@@ -69,7 +69,9 @@ export default async (
 
 		if (!Dry) {
 			try {
-				await (await import("fs/promises")).access(
+				await (
+					await import("fs/promises")
+				).access(
 					(await import("path")).dirname(composedDistDirPath),
 					(await import("fs/promises")).constants.R_OK,
 				);
