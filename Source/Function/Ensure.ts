@@ -2,7 +2,7 @@
  * @module Ensure
  *
  */
-export default <T>(item: MaybeArray<T>): Array<T> => {
+export default <T>(item: MaybeArray<T>): T[] => {
 	return Array.isArray(item) ? item : [item];
 };
 

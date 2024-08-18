@@ -38,7 +38,7 @@ export default async (
 
 		// only works for /**/*(.ext) pattern
 		// ./assets/** → ./assets
-		const startFragment = dir.replace(`/**`, "");
+		const startFragment = dir.replace("/**", "");
 
 		// globbedFromPath: /PATH/TO/assets/foo.js → /foo.js
 		// globbedFromPath: /PATH/TO/assets/nest/foo.js → /nest/foo.js
@@ -69,9 +69,7 @@ export default async (
 
 		if (!Dry) {
 			try {
-				await (
-					await import("fs/promises")
-				).access(
+				await (await import("fs/promises")).access(
 					(await import("path")).dirname(composedDistDirPath),
 					(await import("fs/promises")).constants.R_OK,
 				);
@@ -81,7 +79,7 @@ export default async (
 					composedDistDirPath,
 				);
 			} catch (_Error) {
-				Log(new String(_Error).toString(), Verbose);
+				Log(String(_Error).toString(), Verbose);
 			}
 		}
 

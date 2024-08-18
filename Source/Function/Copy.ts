@@ -30,7 +30,7 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 					return;
 				}
 
-				if (!Format.length) {
+				if (Format.length === 0) {
 					return;
 				}
 
@@ -79,18 +79,14 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 				// The final value of outDirResolveFrom will be used by all asset pairs
 				// Both relative and absolute path are okay
 				await Log(
-					`Resolve assert pair to path from: ${(
-						await import("path")
-					).resolve(outDirResolveFrom)}`,
+					`Resolve assert pair to path from: ${(await import("path")).resolve(outDirResolveFrom)}`,
 					Verbose,
 				);
 
 				for (const { from, to } of Format) {
 					const deduplicatedPaths = [
 						...new Set(
-							await (
-								await import("fast-glob")
-							).default(from, {
+							await (await import("fast-glob")).default(from, {
 								// Ensure outputs contains only file path
 								onlyFiles: true,
 								...Glob,
@@ -98,7 +94,7 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 						),
 					];
 
-					if (!deduplicatedPaths.length) {
+					if (deduplicatedPaths.length === 0) {
 						await Log(
 							`No files matched using current glob pattern: ${Chalk.white(
 								from,
