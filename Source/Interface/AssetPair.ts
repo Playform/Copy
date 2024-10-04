@@ -1,3 +1,5 @@
+import type MaybeArray from "../Type/MaybeArray.js";
+
 /**
  * @module AssetPair
  *
@@ -14,5 +16,3 @@ export default interface Interface {
 	 */
 	to: MaybeArray<string>;
 }
-
-import type MaybeArray from "../Type/MaybeArray.js";

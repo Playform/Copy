@@ -1,3 +1,6 @@
+import type AssetPair from "../Interface/AssetPair.js";
+import type MaybeArray from "../Type/MaybeArray.js";
+
 /**
  * @module Format
  *
@@ -10,9 +13,5 @@ export default (Asset: MaybeArray<AssetPair>) => {
 			to: Ensure(to),
 		}));
 };
-
-import type AssetPair from "../Interface/AssetPair.js";
-
-import type MaybeArray from "../Type/MaybeArray.js";
 
 export const { default: Ensure } = await import("@Function/Ensure.js");

@@ -1,3 +1,7 @@
+import type { Plugin } from "esbuild";
+
+import type Option from "../Interface/Option.js";
+
 export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 	const {
 		Asset = [],
@@ -86,7 +90,9 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 				for (const { from, to } of Format) {
 					const deduplicatedPaths = [
 						...new Set(
-							await (await import("fast-glob")).default(from, {
+							await (
+								await import("fast-glob")
+							).default(from, {
 								// Ensure outputs contains only file path
 								onlyFiles: true,
 								...Glob,
@@ -124,10 +130,6 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 		},
 	};
 };
-
-import type { Plugin } from "esbuild";
-
-import type Option from "../Interface/Option.js";
 
 export const PLUGIN_EXECUTED_FLAG = "esbuild_copy_executed";
 
