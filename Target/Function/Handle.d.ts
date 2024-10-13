@@ -9,7 +9,18 @@
  * @param Dry Dry run mode
  * @returns
  */
-declare const _default: (Out: string, Raw: string[], Glob: string, Base: string, Verbose?: boolean, Dry?: boolean) => Promise<void>;
+declare const _default: (
+	Out: string,
+	Raw: string[],
+	Glob: string,
+	Base: string,
+	Verbose?: boolean,
+	Dry?: boolean,
+) => Promise<void>;
 export default _default;
 export declare const resolve: (...paths: string[]) => string;
-export declare const Log: (Message: string, Verbose: boolean, Before?: boolean) => Promise<void>;
+export declare const Log: (
+	Message: string,
+	Verbose: boolean,
+	Before?: boolean,
+) => Promise<void>;
