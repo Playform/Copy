@@ -1,4 +1,4 @@
-# ©️ [Copy] —
+# [Copy] ©️
 
 ESBuild plugin for assets copy.
 
@@ -13,7 +13,7 @@ ESBuild plugin for assets copy.
 -   Support verbose output log
 -   Run only once or only when assets changed
 
-## 🚀 Installation
+## Installation 🚀
 
 ```sh
 npm install -D -E @playform/copy
