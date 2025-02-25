@@ -50,7 +50,7 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 					const outDir =
 						build.initialOptions.outdir ??
 						// For outfile, use the directory it located in
-						(await import("path")).dirname(
+						(await import("node:path")).dirname(
 							build.initialOptions.outfile!,
 						);
 
@@ -83,7 +83,7 @@ export default async (Option: Partial<Option> = {}): Promise<Plugin> => {
 				// The final value of outDirResolveFrom will be used by all asset pairs
 				// Both relative and absolute path are okay
 				await Log(
-					`Resolve assert pair to path from: ${(await import("path")).resolve(outDirResolveFrom)}`,
+					`Resolve assert pair to path from: ${(await import("node:path")).resolve(outDirResolveFrom)}`,
 					Verbose,
 				);
 

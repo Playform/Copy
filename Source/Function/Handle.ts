@@ -21,7 +21,7 @@ export default async (
 ) => {
 	for (const rawFrom of Raw) {
 		// only support from dir like: /**/*(.ext)
-		const { dir } = (await import("path")).parse(rawFrom);
+		const { dir } = (await import("node:path")).parse(rawFrom);
 
 		// be default, when ends with /*, glob doesnot expand directories
 		// avoid use override option `expandDirectories` and use `/*`
@@ -50,7 +50,7 @@ export default async (
 		// resolve seems to be unnecessary as globbed path is already absolute path
 		const Source = resolve(Glob);
 
-		const isToPathDir = (await import("path")).extname(Base) === "";
+		const isToPathDir = (await import("node:path")).extname(Base) === "";
 
 		const composedDistDirPath = isToPathDir
 			? // /RESOLVE_FROM_DIR/SPECIFIED_TO_DIR/LEFT_FILE_STRUCTURE
@@ -72,13 +72,13 @@ export default async (
 		if (!Dry) {
 			try {
 				await (
-					await import("fs/promises")
+					await import("node:fs/promises")
 				).access(
-					(await import("path")).dirname(composedDistDirPath),
-					(await import("fs/promises")).constants.R_OK,
+					(await import("node:path")).dirname(composedDistDirPath),
+					(await import("node:fs/promises")).constants.R_OK,
 				);
 
-				(await import("fs/promises")).copyFile(
+				(await import("node:fs/promises")).copyFile(
 					Source,
 					composedDistDirPath,
 				);
@@ -98,6 +98,6 @@ export default async (
 
 export const {
 	default: { resolve },
-} = await import("path");
+} = await import("node:path");
 
 export const { default: Log } = await import("@Function/Log.js");
